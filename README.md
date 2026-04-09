@@ -486,6 +486,141 @@ The strongest next upgrades would be:
 
 ---
 
+## Example Ouput
+```
+Real-memory learned-window prefetch PoC
+Configuration
+  lines: 32768
+  working_set: 128
+  iterations: 1500
+  prefetch_count: 8
+  lead_ns: 120000
+  refresh_guard_ns: 90000
+  eviction_stride: 8
+  slow_threshold_cycles: 200
+  model_bucket_count: 65536
+  min_samples: 2
+  min_period_ns: 1000
+  max_period_ns: 50000000
+  period_tolerance_pct: 30
+  confidence_threshold_pct: 55
+  training_pct: 50
+  min_outlier_cycles: 140
+  outlier_sigma_x100: 220
+  min_dev_cycles: 4
+  learn_min_slow_cycles: 150
+  learn_sigma_x100: 160
+  learn_min_dev_cycles: 2
+  min_bad_outliers_per_window: 4
+  very_slow_cycles: 350
+  extreme_slow_cycles: 500
+  predictor_mode: bucket-only
+  global_confidence_threshold_pct: 75
+  global_cooldown_pct: 80
+
+Baseline
+  total_loads: 192000
+  avg_cycles: 219.55
+  p50_cycles: 111
+  p90_cycles: 407
+  p95_cycles: 444
+  p97_cycles: 481
+  p99_cycles: 1184
+  p99_5_cycles: 1554
+  max_cycles: 75073
+  slow_loads: 60326
+  slow_ratio: 0.3142
+  very_slow_loads: 60255
+  extreme_slow_loads: 5534
+  prefetch_instructions: 0
+  loads_in_predicted_windows: 0
+  predicted_windows: 0
+  actual_bad_windows: 604
+  useful_predicted_windows: 0
+  missed_bad_windows: 604
+  avoided_bad_windows: 0
+  predicted_and_avoided_bad_windows: 0
+  window_precision: 0.0000
+  window_recall: 0.0000
+  learned_buckets: 553
+  avg_active_bucket_confidence: 0.6554
+  avg_active_bucket_quality: 0.5000
+  avg_active_bucket_degree: 4.00
+  global_model_active: 1
+  global_predicted_windows: 0
+  learning_events: 37404
+  trained_event_count: 37404
+  severe_bad_windows: 274
+  avg_outliers_per_eval_window: 11.53
+  training_iterations: 750
+  eval_iterations: 750
+  flushes: 24000
+  histogram_lt64: 0
+  histogram_64_127: 122026
+  histogram_128_191: 9648
+  histogram_192_255: 17
+  histogram_256_319: 30
+  histogram_320_383: 8828
+  histogram_384_plus: 51451
+
+RefreshAwarePrefetch
+  total_loads: 192000
+  avg_cycles: 159.65
+  p50_cycles: 111
+  p90_cycles: 407
+  p95_cycles: 407
+  p97_cycles: 407
+  p99_cycles: 518
+  p99_5_cycles: 1036
+  max_cycles: 9028
+  slow_loads: 30506
+  slow_ratio: 0.1589
+  very_slow_loads: 30478
+  extreme_slow_loads: 1929
+  prefetch_instructions: 1716
+  loads_in_predicted_windows: 1730
+  predicted_windows: 406
+  actual_bad_windows: 651
+  useful_predicted_windows: 94
+  missed_bad_windows: 339
+  avoided_bad_windows: 94
+  predicted_and_avoided_bad_windows: 94
+  window_precision: 0.2315
+  window_recall: 0.1444
+  learned_buckets: 596
+  avg_active_bucket_confidence: 0.6854
+  avg_active_bucket_quality: 0.7129
+  avg_active_bucket_degree: 6.64
+  global_model_active: 1
+  global_predicted_windows: 0
+  learning_events: 37438
+  trained_event_count: 37438
+  severe_bad_windows: 355
+  avg_outliers_per_eval_window: 10.86
+  training_iterations: 750
+  eval_iterations: 750
+  flushes: 24000
+  histogram_lt64: 0
+  histogram_64_127: 150945
+  histogram_128_191: 10549
+  histogram_192_255: 10
+  histogram_256_319: 13
+  histogram_320_383: 7078
+  histogram_384_plus: 23405
+
+Comparison
+  avg_cycle_reduction_pct: 27.29
+  slow_load_reduction_pct: 49.43
+  very_slow_reduction_pct: 49.42
+  extreme_slow_reduction_pct: 65.14
+  p95_delta_cycles: 37
+  p99_delta_cycles: 666
+  p99_5_delta_cycles: 518
+```
+
+An average cycle reduction of 27% and slow reduction up to 65%, wow...
+
+---
 ## Final note
 
 This project started as a refresh-inspired idea, but the current implementation is best understood as a **learned timing prefetcher PoC**.
